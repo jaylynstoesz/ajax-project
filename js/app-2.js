@@ -14,6 +14,7 @@ function parse () {
 }
 var site = parse(loc);
 
+
 var xhr = new XMLHttpRequest();
 xhr.open("GET", "http://www.reddit.com/r/martialarts/comments/" + site.id + "/.json", true);
 xhr.addEventListener("load", function() {
@@ -35,20 +36,13 @@ xhr.addEventListener("load", function() {
   var parsedVid = vidSource.split("v=")[1];
   console.log(parsedVid);
 
-/////// yt player
-  var tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/player_api";
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+///// create iframe element
+  var iFrame = document.createElement("iframe");
+    iFrame.height = 420;
+    iFrame.src = "https://www.youtube.com/embed/" + parsedVid;
 
-  var player;
-  function onYouTubePlayerAPIReady() {
-    player = new YT.Player('ytplayer', {
-      height: '390',
-      width: '640',
-      videoId: parsedVid,
-    });
-  }
+    var ytplayer = document.getElementById("ytplayer");
+    ytplayer.appendChild(iFrame);
 
 ////comments section
   var commentsSecLength = doc[1].data.children.length;
