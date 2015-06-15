@@ -1,5 +1,4 @@
-var xhr = new XMLHttpRequest("button");
-
+var xhr = new XMLHttpRequest();
 xhr.open("GET", "http://www.reddit.com/r/MartialArts.json", true);
 xhr.addEventListener("load", function() {
   var doc = JSON.parse(xhr.response);
